@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family:
+                -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto,
+                "Helvetica Neue", Arial,
+                sans-serif;
+            margin: 0;
+            background: #1e1e1e;
+        }
+
+        .messages {
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .message {
+            max-width: 85%;
+            margin: 4px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .username {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .content {
+            padding: 6px 10px;
+            border-left: 4px solid;
+        }
+
+        .sent .content {
+            border-color: #0faeff;
+        }
+
+        .sent .username {
+            color: #0faeff
+        }
+
+        .received .content {
+            border-color: #d93851;
+        }
+
+        .received .username {
+            color: #d93851
+        }
+
+        .text {
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            color: #dbdbdb
+        }
+
+        .meta {
+            font-size: 10px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .media-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .media-group img,
+        .media-group video {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        img,
+        video {
+            max-width: 220px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+
+        audio {
+            width: 220px;
+            margin-top: 5px;
+        }
+
+        .day {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="messages">
+        <div class="day">JANUARY 1, 2025</div>
+
+        <div class="message sent">
+            <div class="username">AutoAsteroid</div>
+            <div class="content">
+                <div class="text">Hey, do you know how to export your Snapchat data? I want to try something with it.</div>
+            </div>
+            <div class="meta">12:00:00 PM</div>
+        </div>
+
+        <div class="message received">
+            <div class="username">GitHub Enjoyer</div>
+            <div class="content">
+                <div class="text">Yeah, go to https://accounts.snapchat.com/v2/download-my-data and request your data export. It usually takes a while to get the ZIP back.</div>
+            </div>
+            <div class="meta">12:00:10 PM</div>
+        </div>
+
+        <div class="message sent">
+            <div class="username">AutoAsteroid</div>
+            <div class="content">
+                <div class="text">Got it. What do I do once I download it?</div>
+            </div>
+            <div class="meta">12:00:20 PM</div>
+        </div>
+
+        <div class="message received">
+            <div class="username">GitHub Enjoyer</div>
+            <div class="content">
+                <div class="text">Extract it, then drop the ZIP contents into your project's data/ folder. After that just run the parser.</div>
+            </div>
+            <div class="meta">12:00:35 PM</div>
+        </div>
+
+        <div class="message sent">
+            <div class="username">AutoAsteroid</div>
+            <div class="content">
+                <div class="text">Wait… I found a better way to view it. I'm building a parser that turns Snapchat exports into clean HTML.</div>
+            </div>
+            <div class="meta">12:00:50 PM</div>
+        </div>
+
+        <div class="message received">
+            <div class="username">GitHub Enjoyer</div>
+            <div class="content">
+                <div class="text">Oh nice. Is it on GitHub?</div>
+            </div>
+            <div class="meta">12:01:00 PM</div>
+        </div>
+
+        <div class="message sent">
+            <div class="username">AutoAsteroid</div>
+            <div class="content">
+                <div class="text">Yeah — https://github.com/AutoAsteroid/snapchat-parser</div>
+            </div>
+            <div class="meta">12:01:10 PM</div>
+        </div>
+
+        <div class="message received">
+            <div class="username">GitHub Enjoyer</div>
+            <div class="content">
+                <div class="text">That's actually really clean. Snapchat's own export doesn't even look this readable.</div>
+            </div>
+            <div class="meta">12:01:25 PM</div>
+        </div>
+
+        <div class="message sent">
+            <div class="username">AutoAsteroid</div>
+            <div class="content">
+                <div class="text">Yeah that's the goal. It also embeds media properly instead of dumping broken references.</div>
+            </div>
+            <div class="content">
+                <img src="instructions.png" loading="lazy">
+            </div>
+            <div class="meta">12:01:40 PM</div>
+        </div>
+
+        <div class="message received">
+            <div class="username">GitHub Enjoyer</div>
+            <div class="content">
+                <div class="text">Okay yeah that's actually way better than the default export. This looks usable.</div>
+            </div>
+            <div class="meta">12:01:55 PM</div>
+        </div>
+    </div>
+</body>
+
+</html>
