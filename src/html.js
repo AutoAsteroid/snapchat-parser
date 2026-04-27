@@ -41,16 +41,16 @@ class ChatHTML {
             body = this.renderAudio(msg.media[0]);
         }
         if (msg.type === "STICKER") {
-            body = `<div class="text">Sent a Sticker</div>`;
+            body = `<div class="text">SENT A STICKER</div>`;
         }
         if (msg.type === "STATUS") {
-            body = `<div class="text">Changed Status</div>`;
+            body = `<div class="text">CHANGED STATUS</div>`;
         }
         if (msg.type === "STATUSERASEDMESSAGE") {
-            body = `<div class="text">Message Deleted</div>`;
+            body = `<div class="text">MESSAGE DELETED</div>`;
         }
         if (msg.type === "STATUSERASEDSNAPMESSAGE") {
-            body = `<div class="text">Deleted a Snap</div>`;
+            body = `<div class="text">DELETED A SNAP</div>`;
         }
 
         return `<div class="message ${side}">
@@ -75,19 +75,19 @@ class ChatHTML {
     renderImage(src) {
         return src 
             ? `<img src="${src}" loading="lazy">` 
-            : `<div class="text">Snap Image Not Saved</div>`;
+            : `<div class="text">SNAP IMAGE NOT SAVED</div>`;
     }
 
     renderVideo(src) {
         return src 
             ? `<video controls src="${src}"></video>` 
-            : `<div class="text">Snap Video Not Saved</div>`;
+            : `<div class="text">SNAP VIDEO NOT SAVED</div>`;
     }
 
     renderAudio(src) {
         return src 
             ? `<audio controls src="${src}"></audio>` 
-            : `<div class="text">Voice Note Not Saved</div>`;
+            : `<div class="text">VOICE NOTE NOT SAVED</div>`;
     }
 
     toHTML() {
