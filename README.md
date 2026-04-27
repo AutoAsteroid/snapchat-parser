@@ -67,3 +67,4 @@ After running, your archived Snapchat data will be generated in the `output/` fo
 
 * This tool works only with official Snapchat data exports.
 * Media mapping is inferred from timestamps due to Snapchat not providing consistent media IDs.
+* Add name mapping in `config.json` to support your custom friend nicknames.
