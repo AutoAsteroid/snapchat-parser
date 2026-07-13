@@ -95,6 +95,7 @@ const css = messages => `<!DOCTYPE html>
             flex-wrap: wrap;
             gap: 6px;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .media-group img,
