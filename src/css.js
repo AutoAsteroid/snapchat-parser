@@ -103,9 +103,12 @@ const css = messages => `<!DOCTYPE html>
 
         .day {
             text-align: center;
-            font-size: 12px;
-            color: #999;
-            margin: 10px 0;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #8e8e93;
+            margin: 20px 0 10px 0;
         }
     </style>
 </head>
