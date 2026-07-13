@@ -90,28 +90,25 @@ export function findMedia(mediaMap, milliseconds, window = 1) {
 }
 
 /**
- * Parse our conversation into an HTML file of our chat with said username
- * @param {string} username The username of the person we are chatting with
- * @param {Array} conversation The snapchat conversation with that username
- * @param {Object<array>} mediaMap Mapping of birthtimes to media
+ * Parse and compile our Snapchat conversation into a structured standalone HTML archive
+ * @param {string} username The Snapchat username of the person we are chatting with
+ * @param {Array} conversation The Snapchat conversation with merged snaps and chats
+ * @param {Object<string, string[]>} mediaMap Media mapping of birthtimes to media  
  */
 export async function createArchive(username, conversation, mediaMap) {
-    
     const mediaFolder = path.join("output", username, "media");
     const archive = new ChatHTML();
     let previousDate = "";
 
-    // We will copy media files directly in these folders so that HTML can render them
-    const uniqueSenders = new Set(conversation.map(({ From }) => From));
-    for (const sender of uniqueSenders) {
+    // Pre create subdirectories for each unique sender to store media file outputs
+    for (const sender of new Set(conversation.map(({ From }) => From))) {
         fs.mkdirSync(path.join(mediaFolder, sender), { recursive: true });
     }
 
+    // For some reason Snapchat actually gives us "Created(microseconds)" in unix milliseconds?
     for (const { From, "Media Type": Type, "Created(microseconds)": Time, Content, IsSender } of conversation) {
-        /**
-         * For some reason Snapchat gives us Created(microseconds) the time in milliseconds?
-         * Fetch all media files with a similar creation date as this Snapchat message
-         */
+        
+        // Copy matching media into the output so that our HTML can inline them
         const mediaFiles = findMedia(mediaMap, Time, 1);
 
         mediaFiles.forEach(fileName => fs.copyFileSync(
@@ -119,18 +116,23 @@ export async function createArchive(username, conversation, mediaMap) {
             path.join("output", username, "media", From, fileName))
         );
 
+        // Format raw timestamps into local human-readable date and time strings
         const [ date, time ] = new Intl.DateTimeFormat("en-US", {
             timeZone: config.timezone || undefined,
             dateStyle: "long",
             timeStyle: "medium",
         }).format(Time).split(" at ");
 
-        if (date !== previousDate) archive.addDay(date); previousDate = date;
-        
+        if (date !== previousDate)
+            archive.addDay(date);
+
+        // Update the previous date so we know when to add a new day inbetween chats
+        previousDate = date;
+    
         /**
          * Media type can vary between TEXT, NOTE, IMAGE, VIDEO, and MEDIA
-         * Image and video are snaps and media is image/video uploads
-         * Notes are voice note mp4 files. Can also be STICKER or STATUS
+         * IMAGE and VIDEO are snaps and MEDIA is uploaded images or videos
+         * NOTES are voice note mp4 files. Can also be STICKER or STATUS
          */
         const name = config.nicknames[From] ?? From;
         const media = mediaFiles.map(id => path.join("media", From, id));
