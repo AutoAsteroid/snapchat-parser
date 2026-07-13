@@ -9,11 +9,10 @@ const css = messages => `<!DOCTYPE html>
     <meta charset="UTF-8">
     <style>
         body {
-            font-family:
-                -apple-system, BlinkMacSystemFont,
-                "Segoe UI", Roboto,
-                "Helvetica Neue", Arial,
-                sans-serif;
+            font-family: 
+                "Avenir Next", 
+                "Nunito", 
+                system-ui, -apple-system, sans-serif;
             margin: 0;
             background: ${background};
         }
@@ -29,21 +28,27 @@ const css = messages => `<!DOCTYPE html>
         }
 
         .message {
-            max-width: 85%;
-            margin: 4px 0;
+            width: 100%;
+            margin-bottom: 2px;
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .username {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .content {
-            padding: 6px 10px;
-            border-left: 4px solid;
+            padding: 0 0 0 8px;
+            border-left: 3px solid transparent;
+            box-sizing: border-box;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
         }
 
         .sent .content {
@@ -63,15 +68,17 @@ const css = messages => `<!DOCTYPE html>
         }
 
         .text {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 15px;
+            line-height: 1.35;
+            font-weight: 400;
             white-space: pre-wrap;
+            word-break: break-word;
             color: #dbdbdb
         }
 
         .meta {
             font-size: 10px;
-            color: #888;
+            color: #aaaaaa;
             margin-top: 2px;
         }
 
@@ -90,7 +97,7 @@ const css = messages => `<!DOCTYPE html>
         }
 
         img, video {
-            max-width: 260px;
+            max-width: 90%;
             height: auto;
             border-radius: 12px;
             object-fit: cover;
