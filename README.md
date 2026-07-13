@@ -70,16 +70,20 @@ You can view your archived chats in the generated HTML files under their respect
 ## ⚙️ Features
 
 - Converts Snapchat chat exports into HTML
-- Embeds media (images, videos, voice notes)
+- Embeds all media (snaps, images, videos, and voice notes)
 - Groups messages by date
 - Handles multi-media messages
 - Heavily improves readability over Snapchat’s raw export format
 
 ## 📌 Notes
 
-- This tool works only with official Snapchat data exports.
-- Media mapping is inferred from timestamps due to Snapchat not providing consistent media IDs.
-- Add name mapping in `config.json` to support your custom friend nicknames.
+- This tool is designed to work exclusively with official Snapchat data exports.
+- Map custom friend nicknames to their usernames in the `config.json` file.
+- Media mapping is entirely inferred from file timestamps because Snapchat does not provide media IDs for snaps specifically.
+
+### 🖥️ Windows Compatibility
+
+Windows machines handle file creation timestamps differently than macOS and Linux, which can cause media to sync to the wrong chat or miss matches entirely. For the most accurate parsing on Windows, running the tool inside WSL is highly recommended. Learn how to set up WSL here: https://learn.microsoft.com/en-us/windows/wsl/install
 
 ## License
 
