@@ -65,7 +65,11 @@ After running, your formatted Snapchat data will be generated in the `output/` f
 
 You can view your archived chats in the generated HTML files under their respective usernames. The media subfolders are your organized media files for that specific chat, which also fixes the problem with Snapchat dumping all your media into the same `chat_media/` folder!
 
----
+## 🔍 Example HTML Output:
+
+<picture>
+    <img src=".github/assets/example.png" alt="Example Showcase" style="padding: 10px; border-radius: 12px; background-color: #1e1e1e;">
+</picture>
 
 ## ⚙️ Features
 

@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <style>
         body {
-            font-family:
-                -apple-system, BlinkMacSystemFont,
-                "Segoe UI", Roboto,
-                "Helvetica Neue", Arial,
-                sans-serif;
+            font-family: 
+                "Avenir Next", 
+                "Nunito", 
+                system-ui, -apple-system, sans-serif;
             margin: 0;
             background: #1e1e1e;
         }
@@ -25,22 +24,31 @@
         }
 
         .message {
-            max-width: 85%;
-            margin: 4px 0;
-            display: flex;
-            flex-direction: column;
+            width: 100%;
+            text-align: left;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-areas: 
+                "username username"
+                "content  meta";
+            gap: 4px 12px;
         }
 
-
         .username {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+            margin-bottom: 0;
         }
 
         .content {
-            padding: 6px 10px;
-            border-left: 4px solid;
+            grid-area: content;
+            padding: 0 0 0 8px;
+            border-left: 3px solid transparent;
+            box-sizing: border-box;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
         }
 
         .sent .content {
@@ -60,16 +68,22 @@
         }
 
         .text {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 15px;
+            line-height: 1.35;
+            font-weight: 400;
             white-space: pre-wrap;
+            word-break: break-word;
             color: #dbdbdb
         }
 
         .meta {
+            grid-area: meta;
             font-size: 10px;
-            color: #888;
-            margin-top: 2px;
+            color: #aaaaaa;
+            margin-top: 0;
+            white-space: nowrap;
+            align-self: end; 
+            margin-bottom: 2px;
         }
 
         .media-group {
@@ -77,20 +91,21 @@
             flex-wrap: wrap;
             gap: 6px;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .media-group img,
         .media-group video {
-            width: 100%;
             border-radius: 10px;
             object-fit: cover;
         }
 
-        img,
-        video {
-            max-width: 220px;
-            border-radius: 10px;
-            margin-top: 5px;
+        img, video {
+            max-width: 90%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
         }
 
         audio {
@@ -100,111 +115,52 @@
 
         .day {
             text-align: center;
-            font-size: 12px;
-            color: #999;
-            margin: 10px 0;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #8e8e93;
+            margin: 20px 0 10px 0;
+        }
+
+        .sent + .sent,
+        .received + .received {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            gap: 0 0;
+        }
+
+        .sent + .sent .content,
+        .received + .received .content {
+            border-top-left-radius: 0px;
+        }
+
+        .sent:has(+ .sent) .content,
+        .received:has(+ .received) .content {
+            border-bottom-left-radius: 0px;
         }
     </style>
 </head>
 
 <body>
     <div class="messages">
-        <div class="day">JANUARY 1, 2025</div>
 
-        <div class="message sent">
-            <div class="username">AutoAsteroid</div>
-            <div class="content">
-                <div class="text">Hey, do you know how to export your Snapchat data? I want to try something with it.</div>
-            </div>
-            <div class="meta">12:00:00 PM</div>
-        </div>
+<div class="day">JANUARY 1, 2026</div>
+<div class="message sent"><div class="username">Jordan</div><div class="content"><div class="text">Good morning!</div></div><div class="meta">10:00:00 AM</div></div>
+<div class="message sent"><div class="content"><div class="text">Today I've got all day to study for my upcoming test.</div></div><div class="meta">10:00:05 AM</div></div>
+<div class="message sent"><div class="content"><div class="text">So pretty boring. What about you?</div></div><div class="meta">10:00:15 AM</div></div>
+<div class="message received"><div class="username">AutoAsteroid</div><div class="content"><div class="text">Nothing much, just programming.</div></div><div class="meta">10:00:30 AM</div></div>
+<div class="message sent"><div class="username">Jordan</div><div class="content"><div class="text">Ah, seems we will both be busy!</div></div><div class="meta">10:00:40 AM</div></div>
+<div class="message sent"><div class="content"><div class="text">Good luck with that. I'll TTYL.</div></div><div class="meta">10:00:05 AM</div></div>
+<div class="day">JANUARY 2, 2025</div>
+<div class="message received"><div class="username">AutoAsteroid</div><div class="content"><div class="text">Do you know how to get your data export from Snapchat?</div></div><div class="meta">10:00:00 PM</div></div>
+<div class="message received"><div class="content"><div class="text">Am I doing it correctly?</div></div><div class="meta">10:00:15 PM</div></div>
+<div class="message received"><div class="content"><div class="media-group"><img src="instructions.png" loading="lazy"></div></div><div class="meta">10:00:20 PM</div></div>
+<div class="message received"><div class="content"><div class="text">Is that really all I need to do?</div></div><div class="meta">10:00:30 PM</div></div>
+<div class="message sent"><div class="username">Jordan</div><div class="content"><div class="text">Yeah, but keep in mind that Snapchat's exports are kind of terrible if you actually want to view your chat conversations.</div></div><div class="meta">10:01:00 PM</div></div>
+<div class="message sent"><div class="content"><div class="text">For some reason they separate your snaps and chats from each other and don't inline media. The HTML files they give you are also kind of ugly honestly.</div></div><div class="meta">10:01:10 PM</div></div>
+<div class="message received"><div class="username">AutoAsteroid</div><div class="content"><div class="text">Well wait until you here what I made... https://github.com/AutoAsteroid/snapchat-parser</div></div><div class="meta">10:01:30 PM</div></div>
 
-        <div class="message received">
-            <div class="username">GitHub Enjoyer</div>
-            <div class="content">
-                <div class="text">Yeah, go to https://accounts.snapchat.com/v2/download-my-data and request your data export. It usually takes a while to get the ZIP back.</div>
-            </div>
-            <div class="meta">12:00:10 PM</div>
-        </div>
-
-        <div class="message sent">
-            <div class="username">AutoAsteroid</div>
-            <div class="content">
-                <div class="text">Got it. What do I do once I download it?</div>
-            </div>
-            <div class="meta">12:00:20 PM</div>
-        </div>
-
-        <div class="message received">
-            <div class="username">GitHub Enjoyer</div>
-            <div class="content">
-                <div class="text">Just unzip it and view the provided HTML files Snapchat gives you.</div>
-            </div>
-            <div class="meta">12:00:35 PM</div>
-        </div>
-
-
-        <div class="message sent">
-            <div class="username">AutoAsteroid</div>
-            <div class="content">
-                <div class="text">Dude these HTML files are literally unreadable if I want to read my messages.</div>
-            </div>
-            <div class="meta">12:00:45 PM</div>
-        </div>
-
-        <div class="message sent">
-            <div class="content">
-                <div class="text">Wait… I found a better way to view it. I found a parser that turns Snapchat exports into clean HTML.</div>
-            </div>
-            <div class="meta">12:00:55 PM</div>
-        </div>
-
-        <div class="message received">
-            <div class="username">GitHub Enjoyer</div>
-            <div class="content">
-                <div class="text">Oh nice. Is it on GitHub?</div>
-            </div>
-            <div class="meta">12:01:00 PM</div>
-        </div>
-
-        <div class="message sent">
-            <div class="username">AutoAsteroid</div>
-            <div class="content">
-                <div class="text">Yeah — https://github.com/AutoAsteroid/snapchat-parser</div>
-            </div>
-            <div class="meta">12:01:10 PM</div>
-        </div>
-
-        <div class="message received">
-            <div class="username">GitHub Enjoyer</div>
-            <div class="content">
-                <div class="text">That's actually really clean. Snapchat's own export doesn't even look this readable.</div>
-            </div>
-            <div class="meta">12:01:25 PM</div>
-        </div>
-
-        <div class="message sent">
-            <div class="username">AutoAsteroid</div>
-            <div class="content">
-                <div class="text">Yeah that's the goal. It also embeds media properly instead of dumping broken references.</div>
-            </div>
-            <div class="meta">12:01:40 PM</div>
-        </div>
-
-        <div class="message sent">
-            <div class="content">
-                <img src="instructions.png" loading="lazy">
-            </div>
-            <div class="meta">12:01:45 PM</div>
-        </div>
-
-        <div class="message received">
-            <div class="username">GitHub Enjoyer</div>
-            <div class="content">
-                <div class="text">Okay yeah that's actually way better than the default export. This looks usable.</div>
-            </div>
-            <div class="meta">12:01:55 PM</div>
-        </div>
     </div>
 </body>
 
