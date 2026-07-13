@@ -43,6 +43,7 @@ const css = messages => `<!DOCTYPE html>
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
+            margin-top: 4px;
             margin-bottom: 0;
         }
 
