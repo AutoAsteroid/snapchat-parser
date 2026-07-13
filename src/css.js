@@ -30,20 +30,24 @@ const css = messages => `<!DOCTYPE html>
         .message {
             width: 100%;
             margin-bottom: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             text-align: left;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-areas: 
+                "username username"
+                "content  meta";
+            gap: 4px 12px;
         }
 
         .username {
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 0;
         }
 
         .content {
+            grid-area: content;
             padding: 0 0 0 8px;
             border-left: 3px solid transparent;
             box-sizing: border-box;
@@ -77,9 +81,13 @@ const css = messages => `<!DOCTYPE html>
         }
 
         .meta {
+            grid-area: meta;
             font-size: 10px;
             color: #aaaaaa;
-            margin-top: 2px;
+            margin-top: 0;
+            white-space: nowrap;
+            align-self: end; 
+            margin-bottom: 2px;
         }
 
         .media-group {
@@ -91,7 +99,6 @@ const css = messages => `<!DOCTYPE html>
 
         .media-group img,
         .media-group video {
-            width: 100%;
             border-radius: 10px;
             object-fit: cover;
         }
