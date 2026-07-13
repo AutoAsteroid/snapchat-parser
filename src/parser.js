@@ -37,11 +37,8 @@ function mapUserMedia(directory = path.join("data", "chat_media")) {
     for (const file of fs.readdirSync(directory)) {
 
         const fullPath = path.join(directory, file);
-        const creation = fs.statSync(fullPath).birthtimeMs;
+        const time = fs.statSync(fullPath).birthtimeMs;
 
-        // For some reason these are offset by 7 hours
-        const offset = 1000 * 60 * 60 * 7;
-        const time = creation - offset;
         userMediaMap[time] ??= [];
         userMediaMap[time].push(file);
     }

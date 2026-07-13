@@ -1,0 +1,14 @@
+{
+    "timezone": "",                     // Timezone format override. Uses your system clock if undefined
+    "nicknames": {
+        "username_0": "name_0",         // Snapchat exports do not include YOUR friend usernames
+        "username_1": "name_1",         // This mapping overrides usernames if you'd prefer it to
+        "username_2": "name_2",
+        "username_3": "name_3",
+        "username_4": "name_4"
+    },
+    "colors": {
+        "sent": "#d93851",              // Sent message color
+        "recieved": "#0faeff"           // Recieved message color
+    }
+}

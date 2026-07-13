@@ -1,5 +1,5 @@
-
+# Remove sensitive and system files from the repository
 data/*
-!data/.gitkeep
-
-output/
+output/*
+!.gitkeep
+config.json
