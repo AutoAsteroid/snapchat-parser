@@ -35,11 +35,11 @@ export function mergeUserData(...objects) {
 export function mapUserMedia(directory = path.join("data", "chat_media")) {
     const userMediaMap = {};
     
+    // Bucket media files to the nearest second for efficient O(1) lookups
     for (const file of fs.readdirSync(directory)) {
         const fullPath = path.join(directory, file);
         const time = fs.statSync(fullPath).birthtimeMs;
 
-        // Bucket to the nearest second for efficient O(1) lookups
         const seconds = Math.round(time / 1000);
         userMediaMap[seconds] ??= [];
         userMediaMap[seconds].push(file);
@@ -67,6 +67,7 @@ export function mapUserMedia(directory = path.join("data", "chat_media")) {
         userMediaMap[seconds] = uniqueFiles;
     }
 
+    // Maps nearest second to media files sent within that nearest second
     return userMediaMap;
 }
 
@@ -92,27 +93,31 @@ export function findMedia(mediaMap, milliseconds, window = 1) {
  * Parse our conversation into an HTML file of our chat with said username
  * @param {string} username The username of the person we are chatting with
  * @param {Array} conversation The snapchat conversation with that username
- * @param {Object<array>} userMediaMap Mapping of birthtimes to media
+ * @param {Object<array>} mediaMap Mapping of birthtimes to media
  */
-export async function createArchive(username, conversation, userMediaMap) {
+export async function createArchive(username, conversation, mediaMap) {
     
     const mediaFolder = path.join("output", username, "media");
     const archive = new ChatHTML();
     let previousDate = "";
 
-    for (const { From, "Media Type": Type, "Created(microseconds)": Time, Content, IsSender } of conversation) {
+    // We will copy media files directly in these folders so that HTML can render them
+    const uniqueSenders = new Set(conversation.map(({ From }) => From));
+    for (const sender of uniqueSenders) {
+        fs.mkdirSync(path.join(mediaFolder, sender), { recursive: true });
+    }
 
-        fs.mkdirSync(path.join(mediaFolder, From), { recursive: true });
+    for (const { From, "Media Type": Type, "Created(microseconds)": Time, Content, IsSender } of conversation) {
         /**
          * For some reason Snapchat gives us Created(microseconds) the time in milliseconds?
          * Fetch all media files with a similar creation date as this Snapchat message
          */
-        const matchFiles = findMedia(userMediaMap, Time, 1);
-        const media = matchFiles.map(id => path.join("media", From, id));
-        
-        for (const file of media) fs.copyFileSync(
-            path.join("data", "chat_media", path.basename(file)), 
-            path.join("output", username, file));
+        const mediaFiles = findMedia(mediaMap, Time, 1);
+
+        mediaFiles.forEach(fileName => fs.copyFileSync(
+            path.join("data", "chat_media", fileName), 
+            path.join("output", username, "media", From, fileName))
+        );
 
         const [ date, time ] = new Intl.DateTimeFormat("en-US", {
             timeZone: config.timezone || undefined,
@@ -121,13 +126,14 @@ export async function createArchive(username, conversation, userMediaMap) {
         }).format(Time).split(" at ");
 
         if (date !== previousDate) archive.addDay(date); previousDate = date;
-
+        
         /**
          * Media type can vary between TEXT, NOTE, IMAGE, VIDEO, and MEDIA
          * Image and video are snaps and media is image/video uploads
          * Notes are voice note mp4 files. Can also be STICKER or STATUS
          */
         const name = config.nicknames[From] ?? From;
+        const media = mediaFiles.map(id => path.join("media", From, id));
 
         archive.addMessage({ name, time, content: Content, media, type: Type, sender: IsSender });
     }
