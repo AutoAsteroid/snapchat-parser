@@ -15,7 +15,7 @@ Snapchat data exports are notoriously user unfriendly for browsing. This program
 
 3. When selecting export options, make sure the toggles below are enabled:
 
-![Snapchat Export Settings](instructions.png)
+![Snapchat Export Settings](.github/assets/instructions.png)
 
 4. Choose the date range to export and confirm your email address.
 
