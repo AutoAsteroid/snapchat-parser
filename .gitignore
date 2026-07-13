@@ -3,3 +3,6 @@ data/*
 output/*
 !.gitkeep
 config.json
+
+# Junk MacOS files
+.DS_Store
