@@ -90,7 +90,7 @@ export async function createArchive(username, conversation, userMediaMap) {
             path.join("output", username, file));
 
         const [ date, time ] = new Intl.DateTimeFormat("en-US", {
-            timeZone: config.timezone,
+            timeZone: config.timezone || undefined,
             dateStyle: "long",
             timeStyle: "medium",
         }).format(Time).split(" at ");

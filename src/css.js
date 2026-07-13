@@ -1,3 +1,7 @@
+import config from "../config.json" with { type: "json" };
+
+const { background, sent, received } = config.colors;
+
 const css = messages => `<!DOCTYPE html>
 <html>
 
@@ -11,7 +15,7 @@ const css = messages => `<!DOCTYPE html>
                 "Helvetica Neue", Arial,
                 sans-serif;
             margin: 0;
-            background: #1e1e1e;
+            background: ${background};
         }
 
         .messages {
@@ -43,19 +47,19 @@ const css = messages => `<!DOCTYPE html>
         }
 
         .sent .content {
-            border-color: #0faeff;
+            border-color: ${sent};
         }
 
         .sent .username {
-            color: #0faeff
+            color: ${sent}
         }
 
         .received .content {
-            border-color: #d93851;
+            border-color: ${received};
         }
 
         .received .username {
-            color: #d93851
+            color: ${received}
         }
 
         .text {

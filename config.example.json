@@ -8,7 +8,8 @@
         "username_4": "name_4"
     },
     "colors": {
-        "sent": "#d93851",              // Sent message color
-        "recieved": "#0faeff"           // Recieved message color
+        "sent": "#0faeff",              // Sent message color
+        "received": "#d93851",          // Recieved message color
+        "background": "#1e1e1e"
     }
 }
