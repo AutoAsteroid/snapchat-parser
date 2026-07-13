@@ -34,14 +34,33 @@ export function mapUserMedia(directory = path.join("data", "chat_media")) {
     const userMediaMap = {};
     
     for (const file of fs.readdirSync(directory)) {
-
         const fullPath = path.join(directory, file);
         const time = fs.statSync(fullPath).birthtimeMs;
 
-        userMediaMap[time] ??= [];
-        userMediaMap[time].push(file);
+        // Bucket to the nearest second for efficient O(1) lookups
+        const seconds = Math.round(time / 1000);
+        userMediaMap[seconds] ??= [];
+        userMediaMap[seconds].push(file);
     }
     return userMediaMap;
+}
+
+/**
+ * Returns an array of the matching media files at the nearest given millisecond
+ * @param {Object} mediaMap Media map object generated from parser/mapUserMedia() 
+ * @param {number} milliseconds Date that these files might have been sent
+ * @param {number} [window=1] Window to find matching message timestamps in
+ */
+export function findMedia(mediaMap, milliseconds, window = 1) {
+    const seconds = Math.round(milliseconds / 1000);
+    const media = [...(mediaMap[seconds] ?? [])];
+
+    // Fetch matching media buckets to this timestamp in O(1) time
+    for (let i = 1; i <= window; i++) {
+        media.push(...(mediaMap[seconds - i] ?? []));
+        media.push(...(mediaMap[seconds + i] ?? []));
+    }
+    return media;
 }
 
 /**
@@ -63,8 +82,7 @@ export async function createArchive(username, conversation, userMediaMap) {
          * For some reason Snapchat gives us Created(microseconds) the time in milliseconds?
          * Fetch all media files with a similar creation date as this Snapchat message
          */
-        const matchTimes = Object.keys(userMediaMap).filter(time => Math.abs(Time - time) <= 2000);
-        const matchFiles = matchTimes.flatMap(time => userMediaMap[time]);
+        const matchFiles = findMedia(userMediaMap, Time, 1);
         const media = matchFiles.map(id => path.join("media", From, id));
         
         for (const file of media) fs.copyFileSync(
