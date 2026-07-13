@@ -89,11 +89,12 @@ const css = messages => `<!DOCTYPE html>
             object-fit: cover;
         }
 
-        img,
-        video {
-            max-width: 220px;
-            border-radius: 10px;
-            margin-top: 5px;
+        img, video {
+            max-width: 260px;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
         }
 
         audio {
