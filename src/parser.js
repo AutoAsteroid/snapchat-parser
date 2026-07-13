@@ -93,7 +93,7 @@ export function findMedia(mediaMap, milliseconds, window = 1) {
  * Parse and compile our Snapchat conversation into a structured standalone HTML archive
  * @param {string} username The Snapchat username of the person we are chatting with
  * @param {Array} conversation The Snapchat conversation with merged snaps and chats
- * @param {Object<string, string[]>} mediaMap Media mapping of birthtimes to media  
+ * @param {Object<number, Array<string>>} mediaMap Media mapping of birthtimes to media  
  */
 export async function createArchive(username, conversation, mediaMap) {
     const mediaFolder = path.join("output", username, "media");

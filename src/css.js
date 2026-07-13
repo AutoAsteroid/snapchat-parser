@@ -112,7 +112,9 @@ const css = messages => `<!DOCTYPE html>
 
 <body>
     <div class="messages">
-        ${messages.join("")}
+
+${messages.join("\n")}
+
     </div>
 </body>
 
