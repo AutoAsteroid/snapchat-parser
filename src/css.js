@@ -29,7 +29,6 @@ const css = messages => `<!DOCTYPE html>
 
         .message {
             width: 100%;
-            margin-bottom: 2px;
             text-align: left;
             display: grid;
             grid-template-columns: 1fr auto;
@@ -125,6 +124,23 @@ const css = messages => `<!DOCTYPE html>
             text-transform: uppercase;
             color: #8e8e93;
             margin: 20px 0 10px 0;
+        }
+
+        .sent + .sent,
+        .received + .received {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            gap: 0 0;
+        }
+
+        .sent + .sent .content,
+        .received + .received .content {
+            border-top-left-radius: 0px;
+        }
+
+        .sent:has(+ .sent) .content,
+        .received:has(+ .received) .content {
+            border-bottom-left-radius: 0px;
         }
     </style>
 </head>
