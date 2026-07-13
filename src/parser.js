@@ -1,13 +1,15 @@
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
+
 import config from "../config.json" with { type: "json" };
 import ChatHTML from "./html.js";
 
 /**
- * Combine Snapchat data by user with arrays of chats and snaps, because for
- * some reason Snapchat stores chats and snap hisory in separate files.
+ * Combine Snapchat data by user with arrays of chats and snaps because Snapchat stores 
+ * chats and snap history in separate files
  * 
- * @param {...Object} objects Objects of user data to combine
+ * @param {...Object} objects Objects of user data to combine (snap and chat history)
  * @returns Combined object of sorted arrays of chat and snap history
  */
 export function mergeUserData(...objects) {
@@ -24,9 +26,9 @@ export function mergeUserData(...objects) {
 }
 
 /**
- * Maps all media in chat_media to their relative birth times to match messages
- * chat_history.json has a Media IDs key, but this only maps to attached media.
- * snap_history.json does not have the same property to match snaps to messages.
+ * Maps all media in chat_media to their relative birth times to match media messages
+ * chat_history.json has Media IDs keys, but this only maps to uploaded/attached media
+ * snap_history.json does NOT have the same property to map snaps to messages
  * 
  * @param {string} directory Folder holding all the chat_media given by Snapchat
  */
@@ -42,6 +44,29 @@ export function mapUserMedia(directory = path.join("data", "chat_media")) {
         userMediaMap[seconds] ??= [];
         userMediaMap[seconds].push(file);
     }
+
+    /**
+     * Process bucketed media files to make sure there are no duplicate files
+     * This happens if you sent the same snap to multiple people at the same time,
+     * which breaks our inline media mapping, matching all of them to one chat
+     */
+    for (const [ seconds, files ] of Object.entries(userMediaMap)) {
+        if (files.length <= 1) continue;
+
+        const uniqueFiles = [];
+        const seenHashes = new Set();
+
+        for (const file of files) {
+            const buffer = fs.readFileSync(path.join(directory, file));
+            const hash = crypto.createHash("md5").update(buffer).digest("hex");
+
+            if (seenHashes.has(hash)) continue;
+            seenHashes.add(hash);
+            uniqueFiles.push(file);
+        }
+        userMediaMap[seconds] = uniqueFiles;
+    }
+
     return userMediaMap;
 }
 
