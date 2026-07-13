@@ -1,6 +1,6 @@
-const { css } = require("./css");
+import css from "./css.js";
 
-class ChatHTML {
+export default class ChatHTML {
     constructor() {
         this.messages = [];
         this.lastSender = null;
@@ -94,5 +94,3 @@ class ChatHTML {
         return css(this.messages);
     }
 }
-
-module.exports = { ChatHTML };

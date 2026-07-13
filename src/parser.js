@@ -1,8 +1,7 @@
-
-const fs = require("fs");
-const path = require("path");
-const config = require("../config.json");
-const builder = require("./html");
+import fs from "fs";
+import path from "path";
+import config from "../config.json" with { type: "json" };
+import ChatHTML from "./html.js";
 
 /**
  * Combine Snapchat data by user with arrays of chats and snaps, because for
@@ -11,7 +10,7 @@ const builder = require("./html");
  * @param {...Object} objects Objects of user data to combine
  * @returns Combined object of sorted arrays of chat and snap history
  */
-function mergeUserData(...objects) {
+export function mergeUserData(...objects) {
     const merged = {};
     const allKeys = new Set(objects.flatMap(obj => Object.keys(obj)));
     const time = "Created(microseconds)";
@@ -31,7 +30,7 @@ function mergeUserData(...objects) {
  * 
  * @param {string} directory Folder holding all the chat_media given by Snapchat
  */
-function mapUserMedia(directory = path.join("data", "chat_media")) {
+export function mapUserMedia(directory = path.join("data", "chat_media")) {
     const userMediaMap = {};
     
     for (const file of fs.readdirSync(directory)) {
@@ -51,10 +50,10 @@ function mapUserMedia(directory = path.join("data", "chat_media")) {
  * @param {Array} conversation The snapchat conversation with that username
  * @param {Object<array>} userMediaMap Mapping of birthtimes to media
  */
-async function createArchive(username, conversation, userMediaMap) {
+export async function createArchive(username, conversation, userMediaMap) {
     
     const mediaFolder = path.join("output", username, "media");
-    const archive = new builder.ChatHTML();
+    const archive = new ChatHTML();
     let previousDate = "";
 
     for (const { From, "Media Type": Type, "Created(microseconds)": Time, Content, IsSender } of conversation) {
@@ -68,7 +67,7 @@ async function createArchive(username, conversation, userMediaMap) {
         const matchFiles = matchTimes.flatMap(time => userMediaMap[time]);
         const media = matchFiles.map(id => path.join("media", From, id));
         
-        for (file of media) fs.copyFileSync(
+        for (const file of media) fs.copyFileSync(
             path.join("data", "chat_media", path.basename(file)), 
             path.join("output", username, file));
 
@@ -93,5 +92,3 @@ async function createArchive(username, conversation, userMediaMap) {
     fs.writeFileSync(path.join("output", username, username + ".html"), archive.toHTML());
     console.log(`├── Successfully saved: ${username} [${conversation.length} messages]`);
 };
-
-module.exports = { mergeUserData, mapUserMedia, createArchive };

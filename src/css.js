@@ -31,7 +31,6 @@ const css = messages => `<!DOCTYPE html>
             flex-direction: column;
         }
 
-
         .username {
             font-size: 12px;
             font-weight: 600;
@@ -113,6 +112,6 @@ const css = messages => `<!DOCTYPE html>
     </div>
 </body>
 
-</html>`;
+</html>`.trim();
 
-module.exports = { css };
+export default css;
