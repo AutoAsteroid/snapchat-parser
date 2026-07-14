@@ -42,7 +42,7 @@ const css = messages => `<!DOCTYPE html>
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-top: 4px;
+            margin-top: 10px;
             margin-bottom: 0;
         }
 
@@ -93,19 +93,12 @@ const css = messages => `<!DOCTYPE html>
         .media-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        .media-group img,
-        .media-group video {
-            border-radius: 10px;
-            object-fit: cover;
         }
 
         img, video {
-            max-width: 90%;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            max-width: 95%;
             height: auto;
             border-radius: 12px;
             object-fit: cover;
@@ -129,9 +122,7 @@ const css = messages => `<!DOCTYPE html>
 
         .sent + .sent,
         .received + .received {
-            margin-top: 0px;
-            margin-bottom: 0px;
-            gap: 0 0;
+            margin-top: -4px;
         }
 
         .sent + .sent .content,
