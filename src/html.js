@@ -106,7 +106,7 @@ export default class ChatHTML {
     renderImage(src) {
         return src
             ? `<img src="${src}" loading="lazy">`
-            : `<div class="text">SNAP IMAGE NOT SAVED</div>`;
+            : `<div class="opened opened--image">Opened</div>`;    
     }
 
     /**
@@ -116,7 +116,7 @@ export default class ChatHTML {
     renderVideo(src) {
         return src
             ? `<video controls src="${src}"></video>`
-            : `<div class="text">SNAP VIDEO NOT SAVED</div>`;
+            : `<div class="opened opened--video">Opened</div>`;    
     }
 
     /**

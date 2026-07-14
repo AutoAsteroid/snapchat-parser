@@ -134,6 +134,41 @@ const css = messages => `<!DOCTYPE html>
         .received:has(+ .received) .content {
             border-bottom-left-radius: 0px;
         }
+
+        .opened {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Avenir Next", "Nunito", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #dbdbdb;
+            background: transparent; 
+            border: 0.5px solid #aaaaaa;
+            padding: 10px 14px;
+            padding-right: 100px;
+            border-radius: 12px;
+            user-select: none;
+            margin: 4px 0;
+        }
+
+        .opened::before {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .opened--image::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ee2345' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='5 3 19 12 5 21 9 12 5 3'/%3E%3C/svg%3E");
+        }
+
+        .opened--video::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a349a4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='5 3 19 12 5 21 9 12 5 3'/%3E%3C/svg%3E");
+        }
     </style>
 </head>
 
