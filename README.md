@@ -25,7 +25,7 @@ Snapchat data exports are notoriously user unfriendly for browsing. This program
 
 ## 📁 Setup
 
-1. Clone or download this repository: `git clone https://github.com/AutoAsteroid/snapchat-parser`
+1. Clone or download this repository: `git clone https://github.com/AutoAsteroid/snapchat-parser.git`
 
 2. Extract the ZIP file inside `data/` so the structure looks like:
 
@@ -38,11 +38,9 @@ Snapchat data exports are notoriously user unfriendly for browsing. This program
 │    ├── ...
 ```
 
-3. Rename `example.config.json` to `config.json` and remove the comments.
+3. Run the program: `npm start`
 
-4. Run the program: `npm start`
-
-5. Watch all your chats automatically format into improved HTML files!
+4. Watch all your chats automatically format into improved HTML files!
 
 
 ## 📤 Output
