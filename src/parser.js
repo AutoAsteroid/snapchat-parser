@@ -38,7 +38,7 @@ export function mapUserMedia(directory = path.join("data", "chat_media")) {
     // Bucket media files to the nearest second for efficient O(1) lookups
     for (const file of fs.readdirSync(directory)) {
         const fullPath = path.join(directory, file);
-        const time = fs.statSync(fullPath).birthtimeMs;
+        const time = fs.statSync(fullPath).mtimeMs;
 
         const seconds = Math.round(time / 1000);
         userMediaMap[seconds] ??= [];

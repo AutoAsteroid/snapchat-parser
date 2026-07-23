@@ -85,10 +85,6 @@ You can view your archived chats in the generated HTML files under their respect
 - Map custom friend nicknames to their usernames in the `config.json` file.
 - Media mapping is entirely inferred from file timestamps because Snapchat does not provide media IDs for snaps specifically.
 
-## 🖥️ Windows Compatibility
-
-Windows machines handle file creation timestamps differently than macOS and Linux, which can cause media to sync to the wrong chat or miss matches entirely. For the most accurate parsing on Windows, running the tool inside WSL is highly recommended. Learn how to set up WSL here: https://learn.microsoft.com/en-us/windows/wsl/install
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
