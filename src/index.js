@@ -3,8 +3,8 @@
  * The current HTML files Snapchat generates lacks inline media and is user unfriendly.
  */
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 // Import provided data files provided from https://accounts.snapchat.com/v2/download-my-data
 import chatHistory from "../data/json/chat_history.json" with { type: "json" };
