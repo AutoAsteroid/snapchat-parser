@@ -4,7 +4,7 @@
     "description": "Converts your Snapchat data export into readable HTML archives with improved formatting, media handling, and chat structure.",
     "main": "src/index.js",
     "scripts": {
-        "start": "node --no-warnings src/index.js",
+        "start": "node src/setup.js && node --no-warnings src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
