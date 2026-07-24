@@ -1,9 +1,19 @@
 
 # Snapchat Data Formatter
 
-Snapchat data exports are notoriously user unfriendly for browsing. This program convert your data exports into readable HTML archives with improved formatting, inline media handling, and an actual chat structure over Snapchat's plain and ugly HTML files.
+Snapchat data exports are notoriously user unfriendly for browsing. This program converts your data exports into readable HTML archives with improved formatting, inline media handling, and an actual chat structure over Snapchat's plain and ugly HTML files.
 
 > All your data is processed locally on your machine. Your personal chat history is never uploaded or shared. Your privacy matters!
+
+---
+
+## ⚙️ Features
+
+- Converts Snapchat chat exports into HTML
+- Embeds all media (snaps, images, videos, and voice notes)
+- Groups messages by date
+- Handles multi-media messages
+- Heavily improves readability over Snapchat’s raw export format
 
 ---
 
@@ -68,14 +78,6 @@ You can view your archived chats in the generated HTML files under their respect
 <picture>
     <img src=".github/assets/example.png" alt="Example Showcase" style="padding: 10px; border-radius: 12px; background-color: #1e1e1e;">
 </picture>
-
-## ⚙️ Features
-
-- Converts Snapchat chat exports into HTML
-- Embeds all media (snaps, images, videos, and voice notes)
-- Groups messages by date
-- Handles multi-media messages
-- Heavily improves readability over Snapchat’s raw export format
 
 ## 📌 Notes
 
